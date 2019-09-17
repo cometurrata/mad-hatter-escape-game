@@ -40,8 +40,11 @@ class Shroom
             this->pixels->begin();
             mcp.pinMode(touchPin, INPUT);
             setAllPixelsToColor(Adafruit_NeoPixel::Color(0, 0, 0));
-            pollTouchTimer.initializeMs(50, TimerDelegate(&Shroom::pollTouchTask, this)).start();
-            lightTaskTimer.initializeMs(105, TimerDelegate(&Shroom::lightTask, this)).start();
+
+            TimerDelegateStdFunction p_pollTouchTask = std::bind(&Shroom::pollTouchTask, this);
+            TimerDelegateStdFunction p_lightTask = std::bind(&Shroom::lightTask, this);
+            pollTouchTimer.initializeMs(50, p_pollTouchTask).start();
+            lightTaskTimer.initializeMs(105, p_lightTask).start();
         }
 
         void pollTouchTask()
