@@ -1,9 +1,11 @@
 #include <user_config.h>
 #include <SmingCore/SmingCore.h>
 
+#include "Adafruit_MCP23017.h"
+
 #define MAX_NB_OF_NOTES 15
 
-MCP mcp;
+Adafruit_MCP23017 mcp;
 Timer procTimer;
 
 bool done = false;
